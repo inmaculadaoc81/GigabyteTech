@@ -1,1 +1,80 @@
-const m=document.querySelector('.menu-toggle'),n=document.querySelector('.nav');m?.addEventListener('click',()=>{const o=n.classList.toggle('open');m.setAttribute('aria-expanded',String(o))});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));const f=document.getElementById('contactForm'),s=document.getElementById('formStatus');f?.addEventListener('submit',async e=>{e.preventDefault();const b=f.querySelector('button[type=submit]'),old=b.innerHTML;b.disabled=true;b.textContent='Enviando…';s.textContent='';const payload=Object.fromEntries(new FormData(f).entries());try{const r=await fetch('/api/contacto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),d=await r.json();if(!r.ok)throw new Error(d.code||'EMAIL_SEND_FAILED');f.reset();s.textContent='✓ Consulta enviada correctamente.'}catch(err){s.textContent='No se pudo enviar. Puedes llamarnos o escribirnos por WhatsApp.'}finally{b.disabled=false;b.innerHTML=old}});
+const menuButton = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('.nav');
+
+menuButton?.addEventListener('click', () => {
+  const open = navigation?.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(Boolean(open)));
+});
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+} else {
+  document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
+}
+
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
+
+if (form) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const button = form.querySelector('button[type="submit"]');
+    const originalButtonHtml = button?.innerHTML || 'Enviar consulta';
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Enviando…';
+    }
+
+    if (status) {
+      status.textContent = 'Enviando consulta…';
+    }
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const response = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (_) {}
+
+      if (!response.ok) {
+        console.error('GigabyteTech formulario:', data);
+        throw new Error(data.code || 'EMAIL_SEND_FAILED');
+      }
+
+      form.reset();
+      if (status) {
+        status.textContent = '✓ Consulta enviada correctamente.';
+      }
+    } catch (error) {
+      console.error('GigabyteTech formulario:', error);
+      if (status) {
+        status.textContent = 'No se pudo enviar la consulta. Puedes llamarnos o escribirnos por WhatsApp.';
+      }
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.innerHTML = originalButtonHtml;
+      }
+    }
+  });
+}
