@@ -1,1 +1,6 @@
-{"name":"taurusmycooktech-web","version":"1.0.0","private":true,"type":"module"}
+{
+  "type": "module",
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://taurusmycooktech.com.es/sitemap.xml
+Disallow: /api/
+Sitemap: https://gigatecnology.com.es/sitemap.xml
