@@ -53,3 +53,14 @@ Este sitio era antes multipágina (tenía /modelos/..., eliminados en
 commits anteriores al pasar a one-page). Añadido middleware.mjs:
 cualquier URL que no sea "/" redirige (301) a la home. Añadida la
 dependencia "@vercel/functions" en package.json.
+
+REVISIÓN ADICIONAL (esta pasada):
+- H1 no seguía la regla final de la familia: era largo (~21 palabras)
+  y terminaba en planteamiento abierto ("y qué pasará con tus
+  archivos"), sin ser una frase 100% afirmativa. Reescrito: "Tu
+  Gigabyte no enciende. Diagnóstico gratuito, sin compromiso."
+  (8 palabras).
+- Verificado: schema.org ya usaba correctamente el teléfono de la caja
+  de información (+34 910 05 90 35), no el número compartido de los
+  botones; borde del chat, sección SEO, banner de cookies y dominio ya
+  correctos. No se ha tocado nada más.
