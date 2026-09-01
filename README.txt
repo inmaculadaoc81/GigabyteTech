@@ -1,5 +1,27 @@
 GIGABYTETECH ONE PAGE
 
+REVISIÓN ADICIONAL (checklist unificado de la familia, a petición del cliente — repo 9/48):
+- BUG REAL — enlace de Cal.com desactualizado. Actualizado a
+  https://cal.com/kelatos/30min?embed=true&theme=light&attendeePhoneNumber=%2B34&overlayCalendar=true.
+- Verificado: el correo soporte@kelatos.com no aparece visible.
+- BUG REAL — el mensaje prellenado de WhatsApp decía "¡Hola Kelatos!".
+  Corregido a "¡Hola GigabyteTech!" en el CTA del hero y en el botón
+  flotante.
+- Verificado: el menú móvil (#mainMenu) ya cierra correctamente al
+  seleccionar cualquier enlace.
+- Verificado: sin iconos ni imágenes con proporciones fijas
+  incorrectas.
+- BUG REAL — el H1 en móvil estaba en 40px, muy por debajo del
+  estándar de 48px pedido por el cliente. Corregido a 48px.
+- BUG REAL — botones del hero (.cta) con border-radius de 15px y sin
+  estado hover. Aumentado a border-radius:999px. Aquí los tres
+  botones (whatsapp, pickup, phone) ya tenían fondo sólido, pero el de
+  teléfono es casi negro (#0d1217) — oscurecerlo más con brightness()
+  no se habría notado, así que en su lugar se ha aclarado ligeramente
+  el fondo y el borde en hover para dar la misma sensación de "esto
+  es un botón"; whatsapp/pickup sí usan brightness(.88) para
+  oscurecerse, al tener colores claros.
+
 Dominio:
 https://gigatecnology.com.es/
 
